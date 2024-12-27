@@ -42,8 +42,8 @@
 * Возможность отправки уведомлений пользователям через email о завершении процесса конвертации или о том, что их проект в скором времени будет удален, если не будут им пользоваться.
 
 ## Используемые источники:
-#Api
+# Api
 * [REST API Design — RESTful API Tutorial](https://restfulapi.net/)
 * [Figma API Documentation](https://www.figma.com/developers/api)
-#UX/UI
+# UX/UI
 * https://m3.material.io
