@@ -44,4 +44,4 @@
 ## Используемые источники:
 #Api
 * [REST API Design — RESTful API Tutorial](https://restfulapi.net/)
-*  Figma API Documentation - https://www.figma.com/developers/api
+* [Figma API Documentation](https://www.figma.com/developers/api)
