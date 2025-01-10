@@ -1,3 +1,5 @@
+## Диаграмма последовательностей
+
 @startuml
 actor USER 
 participant FRONTEND 
