@@ -66,3 +66,70 @@ LLM --> DATABASE: Сохранить полученный макет
 FRONTEND --> USER: Уведомить о возможности сохранения результата
 USER --> FRONTEND: Сохранить полученный результат
 @enduml
+
+## Диаграмма классов
+
+@startuml
+class FigmaDesign {
+  +String filePath
+  +String designData
+  +boolean loadDesign()
+  +boolean validateFile()
+}
+
+class LLM {
+  -ConversionSettings settings
+  +void preprocessData(designData: String)
+  +void analyzeDesign()
+  +String generateStructure() : String
+  +String convertToHTMLCSS(designData: String, settings: ConversionSettings) : HTMLCSSResult
+  +void setConversionSettings(settings: ConversionSettings)
+}
+
+class UserInterface {
+  -FigmaDesign currentDesign
+  -LLM conversionEngine
+  -Database database
+  -HTMLCSSResult currentResult
+  -ConversionSettings currentSettings
+
+  +void uploadDesign()
+  +void displayError(message: String)
+  +void configureSettings()
+  +void startConversion()
+  +void displayResult(result: HTMLCSSResult)
+  +void editCode(result: HTMLCSSResult) : HTMLCSSResult
+  +void saveCode(result: HTMLCSSResult)
+  +void downloadCode(result: HTMLCSSResult)
+  +void sendFeedback(feedback: String)
+}
+
+class Database {
+  +void saveSettings(settings: ConversionSettings) : boolean
+  +void saveCode(userId: String, projectId: String, html: String, css: String) : boolean
+  +void saveFeedback(userId: String, feedback: String) : boolean
+  +ConversionSettings loadSettings(userId: String) : ConversionSettings
+}
+
+class HTMLCSSResult {
+  +String html
+  +String css
+}
+
+class ConversionSettings {
+  +String framework
+  +boolean responsive
+  +String namingConvention
+  +... // Другие настройки
+}
+
+FigmaDesign --> LLM : Передает данные
+LLM --> UserInterface : Передает HTMLCSSResult
+UserInterface --> FigmaDesign : Управляет загрузкой
+UserInterface --> LLM : Инициирует конвертацию
+UserInterface --> Database : Взаимодействует
+UserInterface --> HTMLCSSResult : Отображает/Редактирует
+UserInterface --> ConversionSettings : Управляет
+LLM --> ConversionSettings : Использует
+Database --> ConversionSettings : Загружает
+@enduml
